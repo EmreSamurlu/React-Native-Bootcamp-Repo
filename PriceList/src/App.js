@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 
 import styles from './style/style';
 import Input from './components/Input';
+import Button from './components/Button';
 
 const App = () => {
+  const [productItem, setProductItem] = useState();
+
+  const handleType = text => {
+    console.log(text);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Hello World</Text>
       <View style={styles.filterContainer}>
         <Text>Artan Fiyat</Text>
         <Text>Azalan Fiyat</Text>
@@ -17,8 +23,9 @@ const App = () => {
         <FlatList />
       </View>
       <View style={styles.inputArea}>
-        <Input placeholder="Name" />
-        <Input placeholder="Price" />
+        <Input onType={handleType} placeholder="Name" />
+        <Input onType={handleType} placeholder="Price" />
+        <Button />
       </View>
     </SafeAreaView>
   );
