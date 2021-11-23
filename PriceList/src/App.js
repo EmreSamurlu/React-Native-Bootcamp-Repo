@@ -1,34 +1,39 @@
 import React, {useState} from 'react';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, Text, StyleSheet, FlatList, View} from 'react-native';
 
-import styles from './style/style';
-import Input from './components/Input';
-import Button from './components/Button';
+import InputArea from './components/InputArea';
 
 const App = () => {
-  const [productItem, setProductItem] = useState();
-
-  const handleType = text => {
-    console.log(text);
+  const [data, setData] = useState([]);
+  const handleInput = (product, price) => {
+    setData([{product, price}, ...data]);
   };
 
+  const renderProduct = ({item}) => {
+    return (
+      <View style={styles.card}>
+        <Text>{`${item.product} ${item.price}`}</Text>
+      </View>
+    );
+  };
+
+  console.log(data);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.filterContainer}>
-        <Text>Artan Fiyat</Text>
-        <Text>Azalan Fiyat</Text>
-        <Text>Son Eklenen</Text>
-      </View>
-      <View style={styles.productCards}>
-        <FlatList />
-      </View>
-      <View style={styles.inputArea}>
-        <Input onType={handleType} placeholder="Name" />
-        <Input onType={handleType} placeholder="Price" />
-        <Button />
-      </View>
+    <SafeAreaView>
+      <Text>hello</Text>
+      <FlatList data={data} renderItem={renderProduct} style={styles.list} />
+      <InputArea onInput={handleInput} />
     </SafeAreaView>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  list: {
+    backgroundColor: '#e0e0e0',
+    height: 300,
+  },
+  card: {},
+});
