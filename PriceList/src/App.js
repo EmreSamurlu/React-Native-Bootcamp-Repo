@@ -1,39 +1,36 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, StyleSheet, FlatList, View} from 'react-native';
+import {SafeAreaView, FlatList, View} from 'react-native';
 
+import styles from './style/App.style';
 import InputArea from './components/InputArea';
+import ProductCard from './components/ProductCard';
+import FilterBar from './components/FilterBar';
 
 const App = () => {
   const [data, setData] = useState([]);
+
   const handleInput = (product, price) => {
     setData([{product, price}, ...data]);
   };
 
-  const renderProduct = ({item}) => {
-    return (
-      <View style={styles.card}>
-        <Text>{`${item.product} ${item.price}`}</Text>
-      </View>
-    );
-  };
+  const renderProduct = ({item}) => (
+    <ProductCard product={item.product} price={item.price} />
+  );
 
-  console.log(data);
+  const itemSeperator = () => <View style={styles.seperator} />;
 
   return (
-    <SafeAreaView>
-      <Text>hello</Text>
-      <FlatList data={data} renderItem={renderProduct} style={styles.list} />
-      <InputArea onInput={handleInput} />
+    <SafeAreaView style={styles.container}>
+      <FilterBar style={styles.filterBar} />
+      <FlatList
+        ItemSeparatorComponent={itemSeperator}
+        data={data}
+        renderItem={renderProduct}
+        style={styles.list}
+      />
+      <InputArea style={styles.inputArea} onInput={handleInput} />
     </SafeAreaView>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  list: {
-    backgroundColor: '#e0e0e0',
-    height: 300,
-  },
-  card: {},
-});

@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {TextInput, View, TouchableOpacity, Text} from 'react-native';
+
+import styles from './InputArea.style';
 
 const InputArea = ({onInput}) => {
   const [product, setProduct] = useState('');
@@ -17,27 +13,19 @@ const InputArea = ({onInput}) => {
 
   return (
     <View>
-      <TextInput onChangeText={setProduct} style={styles.input} />
-      <TextInput onChangeText={setPrice} style={styles.input} />
+      <View style={styles.inputArea}>
+        <Text style={styles.titles}>Name</Text>
+        <TextInput onChangeText={setProduct} style={styles.input} />
+      </View>
+      <View style={styles.inputArea}>
+        <Text style={styles.titles}>Price</Text>
+        <TextInput onChangeText={setPrice} style={styles.input} />
+      </View>
       <TouchableOpacity onPress={handleAdd} style={styles.btn}>
-        <Text>Add</Text>
+        <Text style={styles.btnText}>Add</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
 export default InputArea;
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: '#e0e0e0',
-    margin: 5,
-    padding: 5,
-  },
-  btn: {
-    margin: 10,
-    padding: 10,
-    backgroundColor: '#efefef',
-    alignItems: 'center',
-  },
-});
