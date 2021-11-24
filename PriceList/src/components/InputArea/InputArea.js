@@ -4,8 +4,8 @@ import {TextInput, View, TouchableOpacity, Text} from 'react-native';
 import styles from './InputArea.style';
 
 const InputArea = ({onInput}) => {
-  const [product, setProduct] = useState('');
-  const [price, setPrice] = useState('');
+  const [product, setProduct] = useState();
+  const [price, setPrice] = useState(0);
 
   const handleAdd = () => {
     onInput(product, price);
