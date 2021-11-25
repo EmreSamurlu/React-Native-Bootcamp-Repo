@@ -11,17 +11,12 @@ const App = () => {
 
   const handleInput = (product, price) => {
     const productData = {
-      name: product,
-      price: price,
-      id: Math.random(),
-      date: new Date(),
+      product,
+      price,
+      id: new Date(),
     };
     setData([productData, ...data]);
   };
-
-  const renderProduct = ({item}) => (
-    <ProductCard product={item.name} price={item.price} />
-  );
 
   const itemSeperator = () => <View style={styles.seperator} />;
 
@@ -34,14 +29,18 @@ const App = () => {
     setData([...data]);
   };
   const regular = () => {
-    data.sort((a, b) => b.date - a.date);
+    data.sort((a, b) => b.id - a.id);
     setData([...data]);
   };
 
+  //Auto sort by id
   useEffect(() => {
-    data.sort((a, b) => a.price - b.price);
+    data.sort((a, b) => b.id - a.id);
   }, [data]);
 
+  const renderProduct = ({item}) => (
+    <ProductCard product={item.product} price={item.price} />
+  );
   return (
     <SafeAreaView style={styles.container}>
       <FilterBar

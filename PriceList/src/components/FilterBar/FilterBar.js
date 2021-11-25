@@ -1,20 +1,23 @@
 import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View} from 'react-native';
 
 import styles from './FilterBar.style';
+import Button from '../Button';
 
 const FilterBar = ({ascending, descending, regular}) => {
   return (
     <View style={styles.filterContainer}>
-      <TouchableOpacity style={styles.btn} onPress={ascending}>
-        <Text>Artan Fiyat</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={descending}>
-        <Text>Azalan Fiyat</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={regular}>
-        <Text>Tarih</Text>
-      </TouchableOpacity>
+      <Button
+        handlePress={ascending}
+        title="Artan Fiyat"
+        theme="SecondaryBtn"
+      />
+      <Button
+        handlePress={descending}
+        title="Azalan Fiyat"
+        theme="SecondaryBtn"
+      />
+      <Button handlePress={regular} title="Tarih" theme="SecondaryBtn" />
     </View>
   );
 };

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {TextInput, View, TouchableOpacity, Text} from 'react-native';
+import {View} from 'react-native';
 
-import styles from './InputArea.style';
+import Input from '../Input';
+import Button from '../Button';
 
 const InputArea = ({onInput}) => {
   const [product, setProduct] = useState();
@@ -13,17 +14,9 @@ const InputArea = ({onInput}) => {
 
   return (
     <View>
-      <View style={styles.inputArea}>
-        <Text style={styles.titles}>Name</Text>
-        <TextInput onChangeText={setProduct} style={styles.input} />
-      </View>
-      <View style={styles.inputArea}>
-        <Text style={styles.titles}>Price</Text>
-        <TextInput onChangeText={setPrice} style={styles.input} />
-      </View>
-      <TouchableOpacity onPress={handleAdd} style={styles.btn}>
-        <Text style={styles.btnText}>Add</Text>
-      </TouchableOpacity>
+      <Input label="Name" onType={setProduct} />
+      <Input label="Price" onType={setPrice} />
+      <Button title="Add" handlePress={handleAdd} />
     </View>
   );
 };
