@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, FlatList, View} from 'react-native';
+import {SafeAreaView, FlatList, View, Alert} from 'react-native';
 
 import styles from './style/App.style';
 import InputArea from './components/InputArea';
@@ -12,12 +12,16 @@ const App = () => {
   const [data, setData] = useState([]);
 
   const handleInput = (product, price) => {
-    const productData = {
-      product,
-      price,
-      id: new Date(),
-    };
-    setData([productData, ...data]);
+    if (!product || !price) {
+      return Alert.alert('Alan Boş Bırakılamaz!');
+    } else {
+      const productData = {
+        product,
+        price,
+        id: new Date(),
+      };
+      setData([productData, ...data]);
+    }
   };
 
   const itemSeperator = () => <View style={styles.seperator} />;
