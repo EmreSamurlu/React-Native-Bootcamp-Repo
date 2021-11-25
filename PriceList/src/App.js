@@ -6,6 +6,8 @@ import InputArea from './components/InputArea';
 import ProductCard from './components/ProductCard';
 import FilterBar from './components/FilterBar';
 
+import {sortAscending, sortDescending, regular} from './functions/sorting';
+
 const App = () => {
   const [data, setData] = useState([]);
 
@@ -20,17 +22,14 @@ const App = () => {
 
   const itemSeperator = () => <View style={styles.seperator} />;
 
-  const sortAscending = () => {
-    data.sort((a, b) => a.price - b.price);
-    setData([...data]);
+  const handleAscending = () => {
+    sortAscending(data, setData);
   };
-  const sortDescending = () => {
-    data.sort((a, b) => b.price - a.price);
-    setData([...data]);
+  const handleDescending = () => {
+    sortDescending(data, setData);
   };
-  const regular = () => {
-    data.sort((a, b) => b.id - a.id);
-    setData([...data]);
+  const handleDate = () => {
+    regular(data, setData);
   };
 
   //Auto sort by id
@@ -45,9 +44,9 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <FilterBar
         style={styles.filterBar}
-        ascending={sortAscending}
-        descending={sortDescending}
-        regular={regular}
+        ascending={handleAscending}
+        descending={handleDescending}
+        regular={handleDate}
       />
       <FlatList
         ItemSeparatorComponent={itemSeperator}
